@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en" ng-app="angularApp">
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="css/app.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/intro.css">
+	<script src="lib/angular/angular.js"></script>
+	<script src="lib/angular/angular-route.js"></script> <!-- needed for app js for routing -->
+	<script src="lib/angular/angular-resource.js"></script> <!-- needed for services using ngResource -->
+	<script src="js/intro-app.js"></script>
+	<script src="js/intro-controllers.js"></script>
+	<script src="js/intro-filters.js"></script>
+	<script src="js/intro-directives.js"></script>
+	<script src="js/intro-services.js"></script>
+
+</head>
+<body>
+	<div class="section">
+		<h3>Resources</h3>
+		<ol>
+			<li><a href="http://angularjs.org/">Angular website</a> (with interactive examples and code)</li>
+			<li><a href="http://docs.angularjs.org/tutorial/index">Tutorial</a> with <a href="https://github.com/angular/angular-phonecat/">GitHub code</a></li>
+			<li><a href="http://docs.angularjs.org/guide/concepts">Angular Concepts</a></li>			
+			<li><a href="http://docs.angularjs.org/guide/controller">Controllers Guide</a></li>
+			<li><a href="http://docs.angularjs.org/guide/filter">Filters Guide</a></li>
+			<li><a href="http://docs.angularjs.org/guide/dev_guide.services.understanding_services">Services Guide</a></li>
+			<li><a href="http://docs.angularjs.org/tutorial/step_07">Routing & Partials</a> (from tutorial)</li>
+			<li><a href="http://docs.angularjs.org/guide/directive">Directives Guide</a></li>
+		</ol>
+	</div>
+	<div class="section" ng-controller="introBindingCtrlByFunction">
+		<h3>Data binding and Scopes</h3>
+		<div class='info'>using <code>introBindingCtrlByFunction</code> in <code>intro-controllers.js</code> </div>
+		Search: <input ng-model="query">
+		<div id="status">Current search: {{query}}</div>
+		Number of Characters in search: {{lengthOfInput()}}
+	</div>
+	<div class="section" ng-controller="introBindingCtrl">
+		<h3>Data binding, Scopes, Filter</h3>
+		<div class='info'>using <code>introBindingCtrl</code> in <code>intro-controllers.js</code> </div>
+		Search: <input ng-model="query">
+		<div id="status">Current filter: {{query}}</div>
+		<div class="devices">
+			<div ng-repeat="device in devices | filter:query | orderBy:orderProp" class="row"> 
+
+					<span class='span1'><a href="#/devices/{{device.id}}">{{device.name}}</a></span>				
+					<span class='span1'>{{device.type}}</span>
+					<span class='span2'>{{device.resolution}} (Full HD: {{device.resolution | check1080p }})</span>
+					<span class='span1'>{{device.os}}</span>
+					<span class='span1'>{{device.screen_size}}</span>
+			</div>
+  		</div>
+	</div>
+	<div class="section" ng-controller="introBindingCtrl">
+		<h3>Directives</h3>
+		<div class='info'>using 
+			<ol>
+				<li><code>myDraggable</code> in <code>intro-directives.js</code></li>
+				<li><code>myTabs</code> in <code>intro-directives.js</code></li>
+				<li><code>myPane</code> in <code>intro-directives.js</code></li>
+			</ol> 
+		</div>
+		<h4>Custom Behaviour</h3>
+			<div>
+			<span my-draggable>Drag ME</span>
+			<span my-draggable>Drag ME too</span>
+			<span my-draggable>just add "my-draggable" as an attribute</span>
+		</div>
+		<br>
+		<h4>Custom HTML Tags</h3>
+		<my-tabs>
+		  <my-pane title="Hello">
+		    <h5 id="creating-custom-directives_source_hello">Hello</h5>
+		    <p>Lorem ipsum dolor sit amet</p>
+		  </my-pane>
+		  <my-pane title="World">
+		    <h5 id="creating-custom-directives_source_world">World</h5>
+		    <em>Mauris elementum elementum enim at suscipit.</em>
+		    <p><a href ng-click="i = i + 1">counter: {{i || 0}}</a></p>
+		  </my-pane>
+		</my-tabs>
+
+	</div>
+	<div class="section" ng-controller="PhoneListCtrlNotUsingService">
+		<h3>Retrieving Data via AJAX</h3>
+		<div class='info'>using <code>PhoneListCtrlNotUsingService</code> in <code>intro-controllers.js</code> </div>
+		<textarea style='font-family: monospace; height: 150px; width: 100%'>{{phones | json }}</textarea>
+	</div>
+	<div class="section">
+		<h3>Routing and Services</h3>
+		<div class='info'>using 
+			<ol>
+				<li><code>angularApp</code> in <code>intro-app.js</code> (main app and dependencies)</li>
+				<li><code>angularAppJS.config(['$routeProvider',...])</code> in <code>intro-app.js</code> (routing URLs to controllers and partials and putting it in ng-view)</li>
+				<li><code>introServices</code> in <code>intro-services.js</code></li>
+			</ol>
+		</div>
+
+		<div class="view-container">
+		  <div ng-view class="view-frame"></div>
+		</div>	
+	</div>	
+
+</body>
+</html>
+
+

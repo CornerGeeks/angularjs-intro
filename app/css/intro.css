@@ -1,0 +1,11 @@
+
+div.info{
+	padding: 0.5em;
+	margin: 0.5em 0;
+	background-color: #cccc66;
+}
+
+div.section{
+	padding: 1em;
+	border-bottom: 1px solid black;
+}
